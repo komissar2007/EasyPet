@@ -46,7 +46,6 @@ public class MainFragment extends Fragment {
     private Address address;
 
 
-
     public MainFragment() {
         // Required empty public constructor
     }
@@ -128,7 +127,23 @@ public class MainFragment extends Fragment {
                     argument.setCoordinates(coordinates);
                     bundle.putParcelable("argument", argument);
                     resultsFragment.setArguments(bundle);
-                    fragmentTransaction.replace(R.id.fragment_container, resultsFragment).addToBackStack("null").commit();
+                    FetchResultsFromWS fetchResultsFromWS = new FetchResultsFromWS();
+                    fetchResultsFromWS.execute(argument);
+                    try {
+                        Result[] result = fetchResultsFromWS.get();
+                        if (result.length > 0) {
+                            bundle.putParcelableArray("result", result);
+                            fragmentTransaction.replace(R.id.fragment_container, resultsFragment).addToBackStack("null").commit();
+                        } else {
+                            Toast.makeText(getActivity(), getString(R.string.no_results_found_text), Toast.LENGTH_SHORT).show();
+                        }
+
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    } catch (ExecutionException e) {
+                        e.printStackTrace();
+                    }
+
 
                 } else {
                     Toast.makeText(getActivity(), "Cannot allocate current location...", Toast.LENGTH_SHORT).show();
@@ -143,21 +158,5 @@ public class MainFragment extends Fragment {
         super.onSaveInstanceState(outState);
         outState.putParcelable(getString(R.string.coordinates), coordinates);
         outState.putParcelable(getString(R.string.address), address);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-    }
-
-
-    @Override
-    public void onDestroy() {
-        super.onDestroy();
-    }
-
-    @Override
-    public void onDestroyView() {
-        super.onDestroyView();
     }
 }

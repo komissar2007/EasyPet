@@ -40,6 +40,7 @@ public class ResultsFragment extends Fragment {
     private RecyclerListAdapter recyclerListAdapter;
     private RecyclerView recRecyclerView;
     private Argument argument;
+    private Result[] results;
 
 
     public ResultsFragment() {
@@ -49,25 +50,9 @@ public class ResultsFragment extends Fragment {
     public void onStart() {
         super.onStart();
         final Context con = getActivity();
-        FetchResultsFromWS fetchResult = new FetchResultsFromWS();
-        fetchResult.execute(argument);
-        Result[] results;
-        try {
+        recyclerListAdapter = new RecyclerListAdapter(con, results, getFragmentManager().beginTransaction());
+        recRecyclerView.setAdapter(recyclerListAdapter);
 
-            results = fetchResult.get();
-            if (results.length != 0) {
-                recyclerListAdapter = new RecyclerListAdapter(con, results, getFragmentManager().beginTransaction());
-                recRecyclerView.setAdapter(recyclerListAdapter);
-            } else {
-                getFragmentManager().popBackStack();
-                Toast.makeText(getActivity(), getString(R.string.no_results_found_text), Toast.LENGTH_LONG).show();
-            }
-
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        } catch (ExecutionException e) {
-            e.printStackTrace();
-        }
     }
 
     @Nullable
@@ -75,6 +60,7 @@ public class ResultsFragment extends Fragment {
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
         bundle = this.getArguments();
         argument = bundle.getParcelable("argument");
+        results = (Result[]) bundle.getParcelableArray("result");
         View view = inflater.inflate(R.layout.fragment_results, container, false);
 
         ((CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar_layout)).setTitle(argument.getCategory().getName());

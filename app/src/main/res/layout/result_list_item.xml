@@ -60,7 +60,7 @@
             android:textColor="@color/secondary_text"/>
         <View
             android:layout_margin="8dp"
-            android:layout_below="@+id/result_list_item_distance"
+            android:layout_below="@+id/result_list_item_address"
             android:layout_width="match_parent"
             android:layout_height="1dp"
             android:background="@color/divider"/>
