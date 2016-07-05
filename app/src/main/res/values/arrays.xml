@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string-array name="categories">
+        <item>@string/category_park</item>
+        <item>@string/category_pension</item>
+        <item>@string/category_shop</item>
+        <item>@string/category_veterinar</item>
+        <item>@string/category_brush</item>
+        <item>@string/category_trainer</item>
+    </string-array>
+    <string-array name="categories_icons">
+        <item>@string/category_park_icon_path</item>
+        <item>@string/category_pension_icon_path</item>
+        <item>@string/category_shop_icon_path</item>
+        <item>@string/category_veterinar_icon_path</item>
+        <item>@string/category_brush_icon_path</item>
+        <item>@string/category_train_icon_path</item>
+    </string-array>
+
+</resources>
