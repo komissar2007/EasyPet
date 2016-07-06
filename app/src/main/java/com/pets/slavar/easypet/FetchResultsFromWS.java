@@ -60,10 +60,6 @@ public class FetchResultsFromWS extends AsyncTask<Argument, String, Result[]> {
         super.onPreExecute();
     }
 
-    @Override
-    protected void onPostExecute(Result[] results) {
-        super.onPostExecute(results);
-    }
 
     @Override
     protected Result[] doInBackground(Argument... params) {

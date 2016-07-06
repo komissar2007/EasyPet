@@ -1,16 +1,12 @@
 package com.pets.slavar.easypet.fragments;
 
 
-import android.app.ProgressDialog;
 import android.location.Address;
 import android.location.Geocoder;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -115,7 +111,6 @@ public class MainFragment extends Fragment {
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (coordinates.isValid()) {
                     Category category = (Category) categoryGridVIew.getAdapter().getItem(position);
-
                     ResultsFragment resultsFragment = new ResultsFragment();
                     Bundle bundle = new Bundle();
 
@@ -133,7 +128,7 @@ public class MainFragment extends Fragment {
                         Result[] result = fetchResultsFromWS.get();
                         if (result.length > 0) {
                             bundle.putParcelableArray("result", result);
-                            fragmentTransaction.replace(R.id.fragment_container, resultsFragment).addToBackStack("null").commit();
+                            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container, resultsFragment).addToBackStack("null").commit();
                         } else {
                             Toast.makeText(getActivity(), getString(R.string.no_results_found_text), Toast.LENGTH_SHORT).show();
                         }

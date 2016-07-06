@@ -66,7 +66,6 @@ public class ResultsFragment extends Fragment {
         ((CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar_layout)).setTitle(argument.getCategory().getName());
         recRecyclerView = (RecyclerView) view.findViewById(R.id.results_recycler_view);
         recRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
-
         return view;
     }
 

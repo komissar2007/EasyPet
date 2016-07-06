@@ -10,8 +10,10 @@ import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
 import android.os.Bundle;
+import android.support.multidex.MultiDex;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
+import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.Toast;
 
@@ -27,14 +29,16 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private static final int MY_LOCATION_PERMISSION = 123;
     private GoogleApiClient mGoogleApiClient;
     private Location mLastLocation;
-    public static ProgressDialog progressDialog;
 
-
+    @Override
+    protected void attachBaseContext(Context newBase) {
+        super.attachBaseContext(newBase);
+        MultiDex.install(this);
+    }
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        progressDialog = new ProgressDialog(this);
         if (!isConnected(this)) {
             Toast.makeText(this, "No Network", Toast.LENGTH_SHORT).show();
             finish();
@@ -67,7 +71,7 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
     private void commitFragment() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
         if (currentFragment == null) {
-            getSupportFragmentManager().beginTransaction().replace(R.id.fragment_container, new MainFragment(), MainFragment.class.getSimpleName()).commit();
+            getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container, new MainFragment(), MainFragment.class.getSimpleName()).commit();
         }
     }
 
