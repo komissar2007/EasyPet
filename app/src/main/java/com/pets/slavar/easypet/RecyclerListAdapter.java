@@ -52,7 +52,7 @@ public class RecyclerListAdapter extends RecyclerView.Adapter<RecyclerListAdapte
 
         holder.nameTextView.setText(resultArray[position].getName());
         holder.addressTextView.setText(resultArray[position].getAddress());
-        String distance = new DecimalFormat("##.##").format(resultArray[position].getDistance());
+        String distance = new DecimalFormat("##.## ").format(resultArray[position].getDistance());
         holder.distanceTextView.setText(distance.concat(context.getString(R.string.metric)));
         Picasso.with(context).load(resultArray[position].getImageUrl()).fit().into(holder.resultImage);
 

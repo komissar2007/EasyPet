@@ -74,7 +74,11 @@ public class ResultDetailsFragment extends Fragment {
         result = bundle.getParcelable(ResultDetailsFragment.class.getSimpleName());
         ((CollapsingToolbarLayout) view.findViewById(R.id.result_details_collapsing_toolbar_layout)).setTitle(result.getName());
         ImageView headerImageView = (ImageView) view.findViewById(R.id.result_details_header_image);
-        Picasso.with(getActivity()).load(result.getImageUrl()).fit().into(headerImageView);
+        if (!result.getImageUrl().startsWith(getString(R.string.file_prefix)))
+        {
+            Picasso.with(getActivity()).load(result.getImageUrl()).fit().into(headerImageView);
+        }
+
 
         navigateButton = (ImageButton) view.findViewById(R.id.navigate_result_details);
         navigateButton.setOnClickListener(new View.OnClickListener() {

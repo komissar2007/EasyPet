@@ -24,9 +24,11 @@ import java.io.InputStream;
 import java.io.InputStreamReader;
 import java.net.HttpURLConnection;
 import java.net.MalformedURLException;
+import java.net.SocketTimeoutException;
 import java.net.URL;
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.concurrent.TimeoutException;
 
 /**
  * Created by SLAVAR on 6/12/2016.
@@ -71,6 +73,8 @@ public class FetchResultsFromWS extends AsyncTask<Argument, String, Result[]> {
         defaultImage = argument.getCategory().getImageUrl();
 
 
+
+
         Uri buildUri = Uri.parse(BASE_URL + "?").buildUpon()
                 .appendQueryParameter(location, currentCoordinates.getLocation())
                 .appendQueryParameter(sensor, "false")
@@ -83,6 +87,7 @@ public class FetchResultsFromWS extends AsyncTask<Argument, String, Result[]> {
             URL url = new URL(buildUri.toString());
             urlConnection = (HttpURLConnection) url.openConnection();
             urlConnection.setRequestMethod("GET");
+            urlConnection.setConnectTimeout(5000);
             urlConnection.connect();
             inputStream = urlConnection.getInputStream();
             StringBuffer buffer = new StringBuffer();
@@ -104,8 +109,14 @@ public class FetchResultsFromWS extends AsyncTask<Argument, String, Result[]> {
 
         } catch (MalformedURLException e) {
             Log.d(this.getClass().getSimpleName(), "Malformed URL");
+        } catch (SocketTimeoutException e)
+        {
+            Log.d(this.getClass().getSimpleName(), "failed to connect due to timeout");
+            return null;
+
         } catch (IOException e) {
             Log.d(this.getClass().getSimpleName(), "failed to open URL");
+            return null;
         }
         return getResultsFromJSON(JSONString);
     }

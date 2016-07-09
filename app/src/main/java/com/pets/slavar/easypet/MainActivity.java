@@ -68,10 +68,17 @@ public class MainActivity extends AppCompatActivity implements GoogleApiClient.C
 
     }
 
+    @Override
+    protected void onSaveInstanceState(Bundle outState) {
+      //  super.onSaveInstanceState(outState);
+    }
+
     private void commitFragment() {
         Fragment currentFragment = getSupportFragmentManager().findFragmentByTag(MainFragment.class.getSimpleName());
         if (currentFragment == null) {
-            getSupportFragmentManager().beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container, new MainFragment(), MainFragment.class.getSimpleName()).commit();
+            getSupportFragmentManager()
+                    .beginTransaction().setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                    .replace(R.id.fragment_container, new MainFragment(), MainFragment.class.getSimpleName()).commit();
         }
     }
 

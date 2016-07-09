@@ -61,11 +61,14 @@ public class ResultsFragment extends Fragment {
         bundle = this.getArguments();
         argument = bundle.getParcelable("argument");
         results = (Result[]) bundle.getParcelableArray("result");
+        Log.d("SLAVAR TIME 64:",String.valueOf(System.currentTimeMillis()));
         View view = inflater.inflate(R.layout.fragment_results, container, false);
 
         ((CollapsingToolbarLayout) view.findViewById(R.id.collapsing_toolbar_layout)).setTitle(argument.getCategory().getName());
+        Log.d("SLAVAR TIME 68:",String.valueOf(System.currentTimeMillis()));
         recRecyclerView = (RecyclerView) view.findViewById(R.id.results_recycler_view);
         recRecyclerView.setLayoutManager(new LinearLayoutManager(getActivity()));
+        Log.d("SLAVAR TIME 71:",String.valueOf(System.currentTimeMillis()));
         return view;
     }
 

@@ -1,5 +1,6 @@
 package com.pets.slavar.easypet.entities;
 
+import android.app.ProgressDialog;
 import android.os.Parcel;
 import android.os.Parcelable;
 
@@ -67,4 +68,5 @@ public class Argument implements Parcelable{
         dest.writeParcelable(coordinates, flags);
         dest.writeString(name);
     }
+
 }

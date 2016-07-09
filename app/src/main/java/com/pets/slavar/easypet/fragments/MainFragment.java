@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -75,7 +76,9 @@ public class MainFragment extends Fragment {
         fragmentTransaction = getFragmentManager().beginTransaction();
         categoryGridVIew = (GridView) view.findViewById(R.id.gridView);
         setLocationTextView(view, address);
+        Log.d("SLAVAR TIME 79:",String.valueOf(System.currentTimeMillis()));
         setGridViewListener();
+        Log.d("SLAVAR TIME 81:",String.valueOf(System.currentTimeMillis()));
         return view;
     }
 
@@ -110,6 +113,7 @@ public class MainFragment extends Fragment {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
                 if (coordinates.isValid()) {
+                    Log.d("SLAVAR TIME 114:",String.valueOf(System.currentTimeMillis()));
                     Category category = (Category) categoryGridVIew.getAdapter().getItem(position);
                     ResultsFragment resultsFragment = new ResultsFragment();
                     Bundle bundle = new Bundle();
@@ -122,13 +126,24 @@ public class MainFragment extends Fragment {
                     argument.setCoordinates(coordinates);
                     bundle.putParcelable("argument", argument);
                     resultsFragment.setArguments(bundle);
+                    Log.d("SLAVAR TIME 129:",String.valueOf(System.currentTimeMillis()));
                     FetchResultsFromWS fetchResultsFromWS = new FetchResultsFromWS();
                     fetchResultsFromWS.execute(argument);
+
                     try {
                         Result[] result = fetchResultsFromWS.get();
-                        if (result.length > 0) {
+                        Log.d("SLAVAR TIME 133:",String.valueOf(System.currentTimeMillis()));
+
+                        if (result == null)
+                        {
+                            Toast.makeText(getActivity(), getString(R.string.error_connect_to_server), Toast.LENGTH_SHORT).show();
+                        }
+                        else if
+                        ((result.length > 0)) {
                             bundle.putParcelableArray("result", result);
-                            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).replace(R.id.fragment_container, resultsFragment).addToBackStack("null").commit();
+                            fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                    .replace(R.id.fragment_container, resultsFragment)
+                                    .addToBackStack("null").commit();
                         } else {
                             Toast.makeText(getActivity(), getString(R.string.no_results_found_text), Toast.LENGTH_SHORT).show();
                         }
