@@ -19,7 +19,7 @@ import android.widget.Toast;
 
 import com.pets.slavar.easypet.CategoryGridAdapter;
 import com.pets.slavar.easypet.FetchResultsFromWS;
-import com.pets.slavar.easypet.MainActivity;
+import com.pets.slavar.easypet.activities.MainActivity;
 import com.pets.slavar.easypet.R;
 import com.pets.slavar.easypet.entities.Argument;
 import com.pets.slavar.easypet.entities.Category;

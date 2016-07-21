@@ -1,10 +1,7 @@
 package com.pets.slavar.easypet.fragments;
 
-import android.app.ProgressDialog;
 import android.content.Context;
-import android.os.AsyncTask;
 import android.os.Bundle;
-import android.os.SystemClock;
 import android.support.annotation.Nullable;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
@@ -14,22 +11,12 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.HorizontalScrollView;
-import android.widget.ListView;
-import android.widget.TextView;
-import android.widget.Toast;
 
-import com.pets.slavar.easypet.FetchResultsFromWS;
-import com.pets.slavar.easypet.MainActivity;
 import com.pets.slavar.easypet.R;
 import com.pets.slavar.easypet.RecyclerListAdapter;
 import com.pets.slavar.easypet.ResultsListArrayAdapter;
 import com.pets.slavar.easypet.entities.Argument;
 import com.pets.slavar.easypet.entities.Result;
-
-import java.util.concurrent.ExecutionException;
 
 /**
  * Created by SLAVAR on 6/11/2016.

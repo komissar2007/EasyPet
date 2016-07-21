@@ -16,5 +16,14 @@
         <item>@string/category_brush_icon_path</item>
         <item>@string/category_train_icon_path</item>
     </string-array>
+    <string-array name="pref_language_entries">
+        <item>@string/pref_units_hebrew_label</item>
+        <item>@string/pref_units_english_label</item>
+    </string-array>
+    <string-array name="pref_language_values">
+        <item>@string/pref_units_hebrew_value</item>
+        <item>@string/pref_units_english_value</item>
+    </string-array>
+
 
 </resources>

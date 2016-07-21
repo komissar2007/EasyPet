@@ -8,8 +8,7 @@
     <string name="category_park">פארקים</string>
     <string name="category_shop">חנות לבעלי חיים</string>
     <string name="category_veterinar">וטרינר</string>
-    <string name="category_pension">פנסיון לבעלי חיים</string>
-    <string name="category_brush">מספרה לחיות מחמד</string>
+    <string name="category_brush" translatable="false">מספרה לחיות מחמד</string>
     <string name="category_trainer">מאלף כלבים</string>
     <string name="category">category</string>
     <string name="apikey">AIzaSyBLWIALKwNiO-irUmkY08DFYIKkDO6bmZI</string>
@@ -35,4 +34,5 @@
     <string name="pref_units_hebrew_value">iw</string>
     <string name="pref_units_english_value">en</string>
     <string name="pref_language_key">language per key</string>
+    <string name="category_pension">פנסיון</string>
 </resources>

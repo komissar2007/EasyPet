@@ -1,11 +1,11 @@
 package com.pets.slavar.easypet.fragments;
 
-import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.CollapsingToolbarLayout;
 import android.support.v4.app.Fragment;
+import android.util.Patterns;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,17 +13,11 @@ import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.google.android.gms.location.places.Place;
 import com.pets.slavar.easypet.FetchResultDetailsWS;
-import com.pets.slavar.easypet.FetchResultsFromWS;
 import com.pets.slavar.easypet.R;
-import com.pets.slavar.easypet.RecyclerListAdapter;
-import com.pets.slavar.easypet.entities.Argument;
 import com.pets.slavar.easypet.entities.PlaceDetails;
 import com.pets.slavar.easypet.entities.Result;
 import com.squareup.picasso.Picasso;
-
-import org.w3c.dom.Text;
 
 import java.util.concurrent.ExecutionException;
 
@@ -35,8 +29,11 @@ import java.util.concurrent.ExecutionException;
 public class ResultDetailsFragment extends Fragment {
 
     private ImageButton navigateButton;
+    private ImageButton websiteButton;
     private TextView phoneNumberTextView;
+    private ImageButton phoneNumberImageButton;
     private TextView websiteTextView;
+    private PlaceDetails placeDetails;
     Result result;
 
 
@@ -50,7 +47,7 @@ public class ResultDetailsFragment extends Fragment {
         FetchResultDetailsWS fetchResult = new FetchResultDetailsWS();
         fetchResult.execute(result.getPlace_id());
         try {
-            PlaceDetails placeDetails = fetchResult.get();
+            placeDetails = fetchResult.get();
             populateDetailsLayout(placeDetails);
         } catch (InterruptedException e) {
             e.printStackTrace();
@@ -61,7 +58,7 @@ public class ResultDetailsFragment extends Fragment {
 
     private void populateDetailsLayout(PlaceDetails placeDetails) {
         phoneNumberTextView.setText(placeDetails.getPhoneNumber());
-        websiteTextView.setText(placeDetails.getWebSite());
+        //websiteTextView.setText(placeDetails.getWebSite());
 
     }
 
@@ -93,9 +90,33 @@ public class ResultDetailsFragment extends Fragment {
                 startActivity(intent);
             }
         });
+        websiteTextView = (TextView) view.findViewById(R.id.website_result_details_text);
+        websiteButton = (ImageButton) view.findViewById(R.id.website_result_details);
+        websiteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ((placeDetails.getWebSite() != null) &&(Patterns.WEB_URL.matcher(placeDetails.getWebSite().toString()).matches()) )
+                {
+                    Intent intent= new Intent(Intent.ACTION_VIEW,Uri.parse(placeDetails.getWebSite().toString()));
+                    startActivity(intent);
+                }
+
+            }
+        });
 
         phoneNumberTextView = (TextView) view.findViewById(R.id.dial_result_details_text);
-        websiteTextView = (TextView) view.findViewById(R.id.website_result_details_text);
+        phoneNumberImageButton = (ImageButton) view.findViewById(R.id.dial_result_details);
+        phoneNumberImageButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                if ((placeDetails.getPhoneNumber() != null) && (placeDetails.getPhoneNumber().length()>10)) {
+                    Intent callIntent = new Intent(Intent.ACTION_DIAL);
+                    callIntent.setData(Uri.parse("tel:" + placeDetails.getPhoneNumber()));
+                    startActivity(callIntent);
+                }
+            }
+        });
+
         return view;
     }
 }

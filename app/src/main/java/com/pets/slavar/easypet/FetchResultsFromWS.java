@@ -8,6 +8,7 @@ import android.os.SystemClock;
 import android.support.v4.app.FragmentActivity;
 import android.util.Log;
 
+import com.pets.slavar.easypet.activities.MainActivity;
 import com.pets.slavar.easypet.entities.Argument;
 import com.pets.slavar.easypet.entities.Coordinates;
 import com.pets.slavar.easypet.entities.Result;
@@ -79,7 +80,7 @@ public class FetchResultsFromWS extends AsyncTask<Argument, String, Result[]> {
                 .appendQueryParameter(location, currentCoordinates.getLocation())
                 .appendQueryParameter(sensor, "false")
                 .appendQueryParameter("radius", "10000")
-                .appendQueryParameter(language, "iw")
+                .appendQueryParameter(language, MainActivity.getLocalLanguage())
                 .appendQueryParameter("name", argument.getCategory().getName())
                 .appendQueryParameter(key, BuildConfig.GOOGLE_PLACES_API_KEY).build();
 
