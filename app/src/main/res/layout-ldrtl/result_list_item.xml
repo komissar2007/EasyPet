@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:orientation="horizontal"
+    android:id="@+id/result_list_item"
+    >
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="right"
+        >
+
+        <ImageView
+            android:id="@+id/result_list_item_image"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_alignParentRight="true"
+            android:layout_margin="10dp"
+            android:src="@drawable/ic_launcher" />
+
+        <TextView
+            android:id="@+id/result_list_item_label"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_margin="10dp"
+            android:textColor="@color/primary_text"
+            android:layout_toLeftOf="@+id/result_list_item_image"
+            android:gravity="right"
+            android:text="place name"
+            android:textSize="20dp" />
+
+        <TextView
+            android:id="@+id/result_list_item_address"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/result_list_item_label"
+            android:layout_marginBottom="5dp"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:layout_toLeftOf="@+id/result_list_item_image"
+            android:gravity="right"
+            android:text="address 123"
+            android:textSize="14dp"
+            android:maxWidth="200dp"
+            android:textColor="@color/secondary_text"
+             />
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="123"
+            android:id="@+id/result_list_item_distance"
+            android:paddingLeft="20dp"
+            android:textSize="14dp"
+            android:layout_alignTop="@+id/result_list_item_address"
+            android:layout_alignLeft="@+id/result_list_item_label"
+            android:gravity="left"
+            android:textColor="@color/secondary_text"/>
+        <View
+            android:layout_margin="8dp"
+            android:layout_below="@+id/result_list_item_address"
+            android:layout_width="match_parent"
+            android:layout_height="1dp"
+            android:background="@color/divider"/>
+    </RelativeLayout>
+
+
+
+
+</LinearLayout>
